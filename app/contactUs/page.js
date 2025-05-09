@@ -9,14 +9,14 @@ export default function Contact() {
     message: "",
   });
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => { //dynamically updates the appropriate feild
+    setForm({ ...form, [e.target.name]: e.target.value }); //spread operator to keep other values unchanged
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Message sent! ✅");
-    // Here you can connect to Formspree, EmailJS, or your backend API
+   
     setForm({ name: "", email: "", subject: "", message: "" });
   };
 
