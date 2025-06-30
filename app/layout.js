@@ -1,6 +1,6 @@
 import Link from "next/link";
 import "./globals.css";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/button";
 
 export default function RootLayout({ children }) {
   return (
