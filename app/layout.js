@@ -1,11 +1,13 @@
 import Link from "next/link";
 import "./globals.css";
 import { Button } from "@/components/button";
+import { AuthProvider } from "@/context/AuthContext";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+      <AuthProvider>
 
         {/* Navbar */}
         <nav className="bg-white flex h-15 text-black gap-8 justify-around items-center drop-shadow-black">
@@ -26,6 +28,8 @@ export default function RootLayout({ children }) {
               <Link href='./contactUs'>
                 <span className="hover:text-emerald-500">Contact Us</span>
               </Link>
+              <Link href="/sleep" className="text-blue-600">Sleep Data</Link>
+
             </div>
             <div className="pl-10 flex gap-3">
               <Button variant='outline' className="border-2 hover:text-xl gray">Register</Button>
@@ -94,6 +98,7 @@ export default function RootLayout({ children }) {
             © {new Date().getFullYear()} Health Plus. All rights reserved.
           </div>
         </footer>
+        </AuthProvider>
 
       </body>
     </html>
