@@ -16,9 +16,28 @@ export default function SleepPage() {
   useEffect(() => {
     const fetchSleep = async () => {
       try {
-        const res = await fetch("/api2/sleep-data"); // ✅ ensure this is correct now
+        const res = await fetch("/api2/sleep-data");
         const json = await res.json();
-        if (json.success) setSleepData(json.data);
+        if (json.success) {
+          const allData = json.data;
+
+          // Filter last 7 days
+          const today = new Date();
+          const sevenDaysAgo = new Date();
+          sevenDaysAgo.setDate(today.getDate() - 6); // Include today
+
+          const filteredData = allData.filter((entry) => {
+            const entryDate = new Date(entry.date);
+            return entryDate >= sevenDaysAgo && entryDate <= today;
+          });
+
+          // Sort by date ascending (optional for clean graph)
+          filteredData.sort(
+            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+          );
+
+          setSleepData(filteredData);
+        }
       } catch (error) {
         console.error("Error fetching sleep data:", error);
       }
@@ -35,7 +54,9 @@ export default function SleepPage() {
         </h1>
 
         {sleepData.length === 0 ? (
-          <p className="text-center text-gray-500 text-lg">No sleep data found.</p>
+          <p className="text-center text-gray-500 text-lg">
+            No sleep data found.
+          </p>
         ) : (
           <ResponsiveContainer width="100%" height={320}>
             <BarChart
@@ -54,7 +75,7 @@ export default function SleepPage() {
                 tick={{ fontSize: 12 }}
               />
               <Tooltip
-                formatter={(value, name, props) => [`${value} hrs`, "Sleep"]}
+                formatter={(value) => [`${value} hrs`, "Sleep"]}
                 labelStyle={{ fontWeight: "bold" }}
               />
               <Bar
