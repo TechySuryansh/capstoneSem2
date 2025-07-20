@@ -1,9 +1,7 @@
-// For app router: app/services/page.tsx
-// For pages router: pages/services.tsx
+// app/services/page.tsx or pages/services.tsx
 
+"use client"; // Only for App Router
 import React from "react";
-
-
 
 const services = [
   {
@@ -42,21 +40,44 @@ const services = [
       "Track caffeine, screen time, and activity levels to see how daily choices impact your sleep.",
     icon: "🍽️",
   },
+  {
+    title: "Sleep Goal Setting",
+    description:
+      "Set personalized sleep goals and monitor your progress daily with motivating visual indicators.",
+    icon: "🎯",
+  },
+  {
+    title: "Dark Mode Support",
+    description:
+      "Enjoy a calming dark theme for nighttime usage to protect your eyes and maintain sleep hygiene.",
+    icon: "🌙",
+  },
+  {
+    title: "AI Insights",
+    description:
+      "Let our AI analyze your patterns and suggest changes for long-term sleep improvement.",
+    icon: "🤖",
+  },
 ];
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-white px-6 py-12">
-      <h1 className="text-4xl font-bold text-center mb-8">Our Services</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 px-4 py-12 sm:px-6 lg:px-12">
+      <h1 className="text-4xl font-extrabold text-center text-indigo-700 mb-12">
+        🌟 Our Services
+      </h1>
+
+      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((service, index) => (
           <div
             key={index}
-            className="bg-gray-100 p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow"
+            className="bg-white rounded-2xl shadow-md p-6 hover:shadow-2xl transition-all duration-300 border-t-4 border-indigo-400"
           >
-            <div className="text-4xl mb-4">{service.icon}</div>
-            <h2 className="text-xl font-semibold mb-2">{service.title}</h2>
-            <p className="text-gray-700">{service.description}</p>
+            <div className="text-5xl mb-4">{service.icon}</div>
+            <h2 className="text-xl font-bold text-indigo-800 mb-2">
+              {service.title}
+            </h2>
+            <p className="text-gray-600 leading-relaxed">{service.description}</p>
           </div>
         ))}
       </div>
